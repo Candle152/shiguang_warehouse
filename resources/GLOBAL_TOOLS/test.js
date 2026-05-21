@@ -76,14 +76,14 @@ function calculateTimeSlots(sectionNumbers, startH, startM, endH, endM) {
   });
 }
 
-// 根据学期值计算开学日期
+// 根据学期值计算开学日期, 就是个简单计算，谁还不能自己手动调了，鬼知道教务处要怎么安排后续的学期
 function getSemesterStartDate(semesterValue) {
   const year = parseInt(semesterValue.substring(0, 4));
   const termType = semesterValue.slice(-1);
   if (termType === "1") {
-    return `${year}-09-01`;
+    return `${year}-09-08`;
   } else {
-    return `${year + 1}-03-01`;
+    return `${year + 1}-03-02`;
   }
 }
 
@@ -405,8 +405,6 @@ async function saveConfig(config) {
   await saveTimeSlots(timeSlots);
   await saveConfig(courseConfigData);
 
-  AndroidBridge.showToast(
-    `导入成功！${courses.length}门课程，${timeSlots.length}个时间槽`,
-  );
+  AndroidBridge.showToast(`导入成功！${courses.length}门课程`);
   AndroidBridge.notifyTaskCompletion();
 })();
